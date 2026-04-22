@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gym Lens Coach</title>
+    <meta
+      name="description"
+      content="Offline browser fitness coach with automatic exercise detection, rep counting, and live form feedback."
+    />
+  </head>
+  <body>
+    <div id="app">
+      <section class="hero-shell">
+        <div class="hero-copy">
+          <div class="intro-block">
+            <p class="eyebrow">Gym Lens Coach</p>
+            <div class="hero-topline">
+              <h1>Live workout dashboard</h1>
+              <p class="hero-note">Everything you need during the set stays here.</p>
+            </div>
+          </div>
+
+          <div class="console-stack">
+            <div class="status-strip">
+              <span id="cameraState" class="pill pill-warn">Waiting for camera permission</span>
+              <span id="trackingState" class="pill">Not tracking yet</span>
+            </div>
+
+            <div class="live-grid">
+              <article class="live-card live-card-primary">
+                <span class="panel-title">Detected Exercise</span>
+                <strong id="exerciseName">Analyzing...</strong>
+                <span id="exerciseConfidence" class="hud-subtext">Confidence: 0%</span>
+              </article>
+
+              <article class="live-card live-card-accent">
+                <span class="panel-title">Reps</span>
+                <strong id="repCount">0</strong>
+                <span id="repStage" class="hud-subtext">Stage: ready</span>
+              </article>
+
+              <article class="live-card live-card-hold">
+                <span class="panel-title">Plank Hold</span>
+                <strong id="holdTime">00:00</strong>
+                <span id="postureBadge" class="hud-subtext">Posture score: --</span>
+              </article>
+            </div>
+
+            <div class="mini-metrics">
+              <div>
+                <span>Average elbow</span>
+                <strong id="elbowMetric">--</strong>
+              </div>
+              <div>
+                <span>Average knee</span>
+                <strong id="kneeMetric">--</strong>
+              </div>
+              <div>
+                <span>Torso angle</span>
+                <strong id="torsoMetric">--</strong>
+              </div>
+              <div>
+                <span>Crunch ratio</span>
+                <strong id="crunchMetric">--</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="video-shell">
+          <div class="video-stage">
+            <video id="video" playsinline muted></video>
+            <canvas id="overlay"></canvas>
+            <div id="videoGuide" class="video-guide">
+              <div class="guide-figure">
+                <svg viewBox="0 0 80 80" aria-hidden="true">
+                  <circle cx="40" cy="16" r="8"></circle>
+                  <line x1="40" y1="24" x2="40" y2="48"></line>
+                  <line x1="24" y1="30" x2="40" y2="34"></line>
+                  <line x1="40" y1="34" x2="58" y2="28"></line>
+                  <line x1="40" y1="48" x2="30" y2="68"></line>
+                  <line x1="40" y1="48" x2="56" y2="64"></line>
+                </svg>
+              </div>
+              <div class="guide-copy">
+                <span class="guide-label">Camera Guide</span>
+                <strong id="videoGuideTitle">Step back so your full body fits.</strong>
+                <span id="videoGuideText">We need shoulders, hips, knees, and ankles visible before counting starts.</span>
+              </div>
+            </div>
+          </div>
+
+          <article class="video-feedback-card video-feedback-card-large">
+            <span class="panel-title">Live Form Feedback</span>
+            <strong id="primaryCue">Stand where your full body is visible.</strong>
+            <span id="secondaryCue" class="hud-subtext">
+              We need shoulders, hips, knees, and ankles in frame.
+            </span>
+          </article>
+        </div>
+      </section>
+
+      <section class="analytics-section">
+        <div class="section-heading">
+          <p class="eyebrow">Scroll For More</p>
+          <h2>Extra guidance and coach details live below the workout area.</h2>
+        </div>
+
+        <div class="analytics-grid">
+        <article class="panel">
+          <p class="panel-title">What this coach checks</p>
+          <ul class="check-list">
+            <li>Automatic classification across four exercises</li>
+            <li>Joint-angle rep detection for dynamic movements</li>
+            <li>Form cues that change live while you move</li>
+            <li>On-screen overlay with readable workout stats</li>
+          </ul>
+        </article>
+
+        <article class="panel">
+          <p class="panel-title">Why the layout changed</p>
+          <ul class="check-list">
+            <li>The first screen now keeps the camera, reps, detected exercise, and form cue visible together</li>
+            <li>Camera framing hints stay inside the video itself so the user looks in one place</li>
+            <li>Lower content is now optional reading instead of part of the workout flow</li>
+          </ul>
+        </article>
+
+        <article class="panel">
+          <p class="panel-title">How to get the best reading</p>
+          <ul class="check-list">
+            <li>Keep your full body inside the camera frame</li>
+            <li>Use side or slight three-quarter angles for floor exercises</li>
+            <li>Wear clothes that contrast with the background if possible</li>
+            <li>Allow a second for the model to stabilize before starting reps</li>
+          </ul>
+        </article>
+        </div>
+      </section>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
